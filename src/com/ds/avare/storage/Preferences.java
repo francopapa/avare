@@ -734,7 +734,8 @@ public class Preferences {
      * @return
      */
     public boolean isRegistered() {
-        return mPref.getBoolean(mContext.getString(R.string.register), false);
+    	return true;
+    	//return mPref.getBoolean(mContext.getString(R.string.register), false);
     }
 
     /**
