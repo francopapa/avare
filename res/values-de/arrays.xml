@@ -14,12 +14,12 @@ Redistribution and use in source and binary forms, with or without modification,
 <resources> 
     
     <string-array name="resGroups">
-        <item>Datanbank</item>
+        <item>Datenbank</item>
         <item>Wetter</item>
-        <item>AD + VAC + AREA Karten</item>
+        <item>AD-VAV-AREA Karten</item>
         <item>VFR Karten</item>
-        <item>TAC Charts (nur USA) </item>
-        <item>WAC Charts (nur USA) </item>
+        <item>TAC Charts (nur USA)</item>
+        <item>WAC Charts (nur USA)</item>
         <item>IFR Low Enroute Charts</item>
         <item>AD Karten</item>
         <item>Gelände Karten</item>
@@ -46,7 +46,7 @@ Redistribution and use in source and binary forms, with or without modification,
      </string-array>
      
     <string-array name="resNameWeather">
-        <item>Weather</item>
+        <item>Wetter</item>
     </string-array>
         
     <string-array name="resNameAFD">
@@ -80,6 +80,7 @@ Redistribution and use in source and binary forms, with or without modification,
     </string-array>
     
     <string-array name="resFilesWeather">
+        <item>weather</item>
     </string-array>
         
     <string-array name="resFilesIFRLE">
@@ -175,7 +176,7 @@ Redistribution and use in source and binary forms, with or without modification,
 
     <string-array name="Opacity">
         <item>Transparent</item>
-        <item>50 Prozent durchsichtig</item>
+        <item>50 Prozent transparent</item>
         <item>Undurchsichtig</item>
     </string-array>
 
@@ -186,7 +187,7 @@ Redistribution and use in source and binary forms, with or without modification,
     </string-array>
 
     <string-array name="TimerRingSizePrompt">
-        <item>keine Anzeige</item>
+        <item>Keine</item>
         <item>2 Minuten</item>
         <item>5 Minuten</item>
         <item>10 Minuten</item>
@@ -206,8 +207,8 @@ Redistribution and use in source and binary forms, with or without modification,
     </string-array>
 
 	<string-array name="DistanceRingTypePrompts">
-        <item>keine</item>
-        <item>dynamisch</item>
+        <item>Keine</item>
+        <item>Dynamisch</item>
         <item>Fixiert 2/5/10</item>
     </string-array>
 
@@ -218,7 +219,7 @@ Redistribution and use in source and binary forms, with or without modification,
     </string-array>
 
 	<string-array name="AutoPostTracksPrompts">
-        <item>kein</item>
+        <item>Keine</item>
         <item>Sende email</item>
         <item>Sende an alle Anwendungen</item>
     </string-array>
@@ -226,7 +227,7 @@ Redistribution and use in source and binary forms, with or without modification,
 	<string-array name="TextFieldOptions">
 	    <item>Keine</item>
 		<item>Greenwich Zeit</item>
-	    <item>Lokalzeit</item>
+	    <item>Lokal Zeit</item>
 		<item>Ground Speed</item>
 	    <item>Track</item>
 	    <item>Bearing</item>
