@@ -13,12 +13,16 @@ Redistribution and use in source and binary forms, with or without modification,
 package com.ds.avare.place;
 
 import java.io.FileInputStream;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.ds.avare.gps.GpsParams;
 import com.ds.avare.position.Origin;
 import com.ds.avare.position.Projection;
 import com.ds.avare.storage.KmlPlacemarkParser;
+import com.ds.avare.storage.StringPreference;
+import com.ds.avare.utils.Helper;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -164,6 +168,8 @@ public class POI {
     String whereAndHowFar(KmlPlacemarkParser.Placemark p) {
     	double brg = Projection.getStaticBearing(mGpsParams.getLongitude(), mGpsParams.getLatitude(), p.mLon, p.mLat);
     	double dst = Projection.getStaticDistance(mGpsParams.getLongitude(), mGpsParams.getLatitude(), p.mLon, p.mLat);
+    	
+    	brg = Helper.getMagneticHeading(brg, mGpsParams.getDeclinition());
     	return String.format("%03d %03d", (int) dst, (int) brg);
     }
     
@@ -171,5 +177,34 @@ public class POI {
     //
     public void setGpsParams(GpsParams gpsParams) {
     	mGpsParams = gpsParams;
+    }
+    
+    // Search our list for a name that closely matches what is passed in.
+    public void search(String name, LinkedHashMap<String, String> params) {
+    	if(null != mPoints) {
+    		final String uName = name.toUpperCase();
+    		for(int idx = 0; idx < mPoints.size(); idx++) {
+    			KmlPlacemarkParser.Placemark p = mPoints.get(idx);
+    			final String mName = p.mName.toUpperCase();
+    			if (mName.startsWith(uName)) {
+    		        StringPreference s = new StringPreference(Destination.KML, "TYPE", p.mName, p.mName);
+    		        s.putInHash(params);
+    			}
+    		}
+    	}
+    }
+    
+    public KmlPlacemarkParser.Placemark getPlacemark(String name){
+    	if(null != mPoints) {
+    		final String uName = name.toUpperCase();
+    		for(int idx = 0; idx < mPoints.size(); idx++) {
+    			KmlPlacemarkParser.Placemark p = mPoints.get(idx);
+    			final String mName = p.mName.toUpperCase();
+    			if (mName.equals(uName)) {
+    				return p;
+    			}
+    		}
+    	}
+    	return null;
     }
 }

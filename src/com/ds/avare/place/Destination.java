@@ -28,6 +28,7 @@ import com.ds.avare.position.Projection;
 import com.ds.avare.shapes.TrackShape;
 import com.ds.avare.storage.DataBaseHelper;
 import com.ds.avare.storage.DataSource;
+import com.ds.avare.storage.KmlPlacemarkParser;
 import com.ds.avare.storage.Preferences;
 import com.ds.avare.storage.StringPreference;
 import com.ds.avare.utils.BitmapHolder;
@@ -115,6 +116,7 @@ public class Destination extends Observable {
     public static final String FIX = "Fix";
     public static final String NAVAID = "Navaid";
     public static final String AD = "AIRPORT-DIAGRAM";
+    public static final String KML = "KML";
     
     /**
      * Contains all info in a hash map for the destination
@@ -378,10 +380,27 @@ public class Destination extends Observable {
                 parseGps(mName, mDestType);
             }
 
+	        if(mDestType.equals(KML)){
+	        	KmlPlacemarkParser.Placemark p = mService.getPOI().getPlacemark(mName);
+	        	if(null != p) {
+		            mParams.put(DataBaseHelper.LONGITUDE, "" + p.mLon);
+		            mParams.put(DataBaseHelper.LATITUDE, "" + p.mLat);
+		            mParams.put(DataBaseHelper.FACILITY_NAME, KML);
+		            addTime();
+		            mAfdFound = null;
+		            mFound = true;
+		            mLooking = false;
+		            mDbType = KML;
+		            mTrackShape.updateShape(new GpsParams(getLocationInit()), Destination.this);
+		        	return true;
+	        	}
+	        	return false;
+	        }
+	        
 	        if(null == mDataSource) {
 	        	return false;
         	}
-        	
+
 	        if(mDestType.equals(GPS)) {
 	            /*
 	             * For GPS coordinates, simply put parsed lon/lat in params
