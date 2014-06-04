@@ -79,6 +79,7 @@ public class KmlPlacemarkParser {
     // The root tag should be "<kml>", search for the opening "<Document>" tag
     //
     private List<Placemark> readKmlData(XmlPullParser parser) throws XmlPullParserException, IOException {
+        List<Placemark> entries = null;
 
         parser.require(XmlPullParser.START_TAG, NS, KML);	// We must be inside the <kml> tag now
         while (parser.next() != XmlPullParser.END_TAG) {
@@ -87,12 +88,12 @@ public class KmlPlacemarkParser {
             }
             String name = parser.getName();
             if (name.equals(DOCUMENT)) {
-                return readDocument(parser);
+                entries =  readDocument(parser);
             } else {
                 skip(parser);
             }
         }  
-        return null;
+        return entries;
     }
 
     // We are in the document tag, now search for either "Folder" or "Placemark"
@@ -109,7 +110,7 @@ public class KmlPlacemarkParser {
             if (name.equals(PLACEMARK)) {
                 entries.add(readPlacemark(parser));
             } else if (name.equals(FOLDER)) {
-                return readFolder(parser);
+                entries = readFolder(parser);
             } else {
                 skip(parser);
             }

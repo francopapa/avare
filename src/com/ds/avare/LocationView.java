@@ -1207,10 +1207,11 @@ public class LocationView extends View implements MultiTouchObjectCanvas<Object>
              * Restore some paint settings back to what they were so as not to
              * mess things up
              */
-            mDistanceRingPaint.setAlpha(0xFF);
             mDistanceRingPaint.setStyle(Style.FILL);
-            mDistanceRingPaint.setColor(Color.GREEN);
-            
+            mDistanceRingPaint.setColor(Color.WHITE);
+            mDistanceRingPaint.setAlpha(0xFF);
+            mDistanceRingPaint.setShadowLayer(2, 3, 3,Color.BLACK );
+
             /*
              * Draw the corresponding text
              */
@@ -1220,15 +1221,15 @@ public class LocationView extends View implements MultiTouchObjectCanvas<Object>
             float adjY = (float) Math.cos((bearing - 10) * Math.PI / 180);	// the course line for readability
 
             drawShadowedText(canvas, mDistanceRingPaint,
-                    text[DistanceRings.RING_INNER], Color.DKGRAY,
+                    text[DistanceRings.RING_INNER], Color.BLACK,
                     x + ringR[DistanceRings.RING_INNER] * adjX, 
                     y - ringR[DistanceRings.RING_INNER] * adjY);
             drawShadowedText(canvas, mDistanceRingPaint,
-                    text[DistanceRings.RING_MIDDLE], Color.DKGRAY,
+                    text[DistanceRings.RING_MIDDLE], Color.BLACK,
                     x + ringR[DistanceRings.RING_MIDDLE] * adjX, 
                     y - ringR[DistanceRings.RING_MIDDLE] * adjY);
             drawShadowedText(canvas, mDistanceRingPaint,
-                    text[DistanceRings.RING_OUTER], Color.DKGRAY,
+                    text[DistanceRings.RING_OUTER], Color.BLACK,
                     x + ringR[DistanceRings.RING_OUTER] * adjX, 
                     y - ringR[DistanceRings.RING_OUTER] * adjY);
     
@@ -1250,10 +1251,10 @@ public class LocationView extends View implements MultiTouchObjectCanvas<Object>
             
             mDistanceRingPaint.setAlpha(0xFF);
             mDistanceRingPaint.setStyle(Style.FILL);
-            mDistanceRingPaint.setColor(Color.GREEN);
+            mDistanceRingPaint.setColor(Color.WHITE);
 
             drawShadowedText(canvas, mDistanceRingPaint, 
-            		String.format("%d", mPref.getTimerRingSize()), Color.DKGRAY, 
+            		String.format("%d", mPref.getTimerRingSize()), Color.BLACK, 
             		x + ringR[DistanceRings.RING_SPEED] * adjX, 
             		y - ringR[DistanceRings.RING_SPEED] * adjY);
         }
