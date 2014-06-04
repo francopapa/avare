@@ -383,8 +383,10 @@ public class Destination extends Observable {
 	        if(mDestType.equals(KML)){
 	        	KmlPlacemarkParser.Placemark p = mService.getPOI().getPlacemark(mName);
 	        	if(null != p) {
-		            mParams.put(DataBaseHelper.LONGITUDE, "" + p.mLon);
-		            mParams.put(DataBaseHelper.LATITUDE, "" + p.mLat);
+	        		mLatd = p.mLat;
+	        		mLond = p.mLon;
+		            mParams.put(DataBaseHelper.LONGITUDE, "" + mLond);
+		            mParams.put(DataBaseHelper.LATITUDE, "" + mLatd);
 		            mParams.put(DataBaseHelper.FACILITY_NAME, KML);
 		            addTime();
 		            mAfdFound = null;
@@ -550,7 +552,7 @@ public class Destination extends Observable {
         	 * This runs on UI
         	 */
             mFound = result;
-            if(mDbType.equals(GPS) || mDbType.equals(MAPS)) {
+            if(mDbType.equals(GPS) || mDbType.equals(KML) || mDbType.equals(MAPS)) {
                 /*
                  * These dont come from db so dont assign from params.
                  */

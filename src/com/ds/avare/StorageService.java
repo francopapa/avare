@@ -50,7 +50,10 @@ import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Binder;
+import android.os.Environment;
 import android.os.IBinder;
+
+import java.io.File;
 import java.net.URI;
 
 /**
@@ -290,7 +293,11 @@ public class StorageService extends Service {
         
         mFlightStatus = new FlightStatus(mGpsParams);
         
-        mPOI = new POI(getApplicationContext(), "/sdcard/com.ds.avare/My Places.kml");
+        mPOI = new POI(getApplicationContext(), 
+        		Environment.getExternalStorageDirectory().getAbsolutePath() + 
+        		File.separatorChar + "com.ds.avare" + 
+        		File.separatorChar + "Tracks" +
+        		File.separatorChar +  "My Places.kml");
 
         /*
          * Monitor TFR every hour.

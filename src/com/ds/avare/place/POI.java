@@ -51,6 +51,7 @@ public class POI {
 	float 			m8Pix;
 	float 			m15Pix;
 	float 			m25Pix;
+	float 			m30Pix;
 	
 	/***
 	 * public constructor for user defined PointsOfInterest
@@ -81,6 +82,7 @@ public class POI {
         m8Pix = 8 * mPix;
         m15Pix = 15 * mPix;
         m25Pix = 25 * mPix;
+        m30Pix = 30 * mPix;
 	}
 	
 	/***
@@ -135,6 +137,8 @@ public class POI {
 	        
 	        // and the distance/brg below
 	        drawShadowedText(canvas, mPix, mPaint, dstBrg, x, y + m25Pix);
+//	        drawShadowedText(canvas, mPix, mPaint, dstBrg.substring(0,  3), x - m30Pix, y - m2Pix);
+//	        drawShadowedText(canvas, mPix, mPaint, dstBrg.substring(3,  7), x + m25Pix, y - m2Pix);
 		}
 	}
 
@@ -195,7 +199,7 @@ public class POI {
     			KmlPlacemarkParser.Placemark p = mPoints.get(idx);
     			final String mName = p.mName.toUpperCase();
     			if (mName.startsWith(uName)) {
-    		        StringPreference s = new StringPreference(Destination.KML, "TYPE", p.mName, p.mName);
+    		        StringPreference s = new StringPreference(Destination.KML, Destination.KML, "Google Earth KML Defined Point", p.mName);
     		        s.putInHash(params);
     			}
     		}

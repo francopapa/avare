@@ -45,6 +45,7 @@ public class SearchAdapter extends ArrayAdapter<String> {
     private BitmapHolder mNoBitmapHolder;
     private BitmapHolder mGeoBitmapHolder;
     private BitmapHolder mMapBitmapHolder;
+    private BitmapHolder mKMLBitmapHolder;
     
     /**
      * @param context
@@ -70,6 +71,7 @@ public class SearchAdapter extends ArrayAdapter<String> {
         mFixBitmapHolder = new BitmapHolder(mContext, R.drawable.fix);
         mGeoBitmapHolder = new BitmapHolder(mContext, R.drawable.geo);
         mMapBitmapHolder = new BitmapHolder(mContext, R.drawable.maps);
+        mKMLBitmapHolder = new BitmapHolder(mContext, R.drawable.pushpin);
     }
 
     @Override
@@ -162,6 +164,9 @@ public class SearchAdapter extends ArrayAdapter<String> {
             }
             else if(dbType.equals(Destination.GPS)) {
                 imgView.setImageBitmap(mGeoBitmapHolder.getBitmap());
+            }
+            else if(dbType.equals(Destination.KML)) {
+                imgView.setImageBitmap(mKMLBitmapHolder.getBitmap());
             }
             else if(dbType.equals(Destination.MAPS)) {
                 imgView.setImageBitmap(mMapBitmapHolder.getBitmap());
