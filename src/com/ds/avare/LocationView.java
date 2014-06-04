@@ -22,6 +22,7 @@ import com.ds.avare.gps.GpsParams;
 import com.ds.avare.instruments.EdgeDistanceTape;
 import com.ds.avare.place.Destination;
 import com.ds.avare.place.Obstacle;
+import com.ds.avare.place.POI;
 import com.ds.avare.place.Runway;
 import com.ds.avare.position.Movement;
 import com.ds.avare.position.Origin;
@@ -252,6 +253,8 @@ public class LocationView extends View implements MultiTouchObjectCanvas<Object>
     boolean mDoCallbackWhenDone;
     LongTouchDestination mLongTouchDestination;
 
+    POI mPOI;
+    
     /**
      * @param context
      */
@@ -348,6 +351,8 @@ public class LocationView extends View implements MultiTouchObjectCanvas<Object>
         mDipToPix = Helper.getDpiToPix(context);
         
         mInfoLines = new InfoLines(this);
+        
+        mPOI = new POI(context, mDipToPix, "/sdcard/com.ds.avare/My Places.kml");
     }
     
     /**
@@ -1386,6 +1391,7 @@ public class LocationView extends View implements MultiTouchObjectCanvas<Object>
         drawObstacles(canvas);
         drawRunways(canvas);
         drawAircraft(canvas);
+      	mPOI.draw(canvas, mFace, mOrigin);
         
         if(mTrackUp) {
             canvas.restore();
@@ -1396,6 +1402,7 @@ public class LocationView extends View implements MultiTouchObjectCanvas<Object>
         drawVASI(canvas);
       	mInfoLines.drawCornerTextsDynamic(canvas, mPaint, TEXT_COLOR, TEXT_COLOR_OPPOSITE, SHADOW);
       	drawEdgeMarkers(canvas);
+      	
     }    
 
     /**
@@ -1453,6 +1460,8 @@ public class LocationView extends View implements MultiTouchObjectCanvas<Object>
          */
         mGpsParams = params;
 
+        mPOI.setGpsParams(params);
+        
         updateCoordinates();
         
         /*
