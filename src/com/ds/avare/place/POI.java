@@ -166,11 +166,18 @@ public class POI {
     // Calculate the distance and bearing to the point from our current location
     //
     String whereAndHowFar(KmlPlacemarkParser.Placemark p) {
-    	double brg = Projection.getStaticBearing(mGpsParams.getLongitude(), mGpsParams.getLatitude(), p.mLon, p.mLat);
+    	
+    	// Heading from current location
+    	double hdg = Projection.getStaticBearing(mGpsParams.getLongitude(), mGpsParams.getLatitude(), p.mLon, p.mLat);
+
+    	// Adjust heading for declination
+    	hdg = Helper.getMagneticHeading(hdg, mGpsParams.getDeclinition());
+    	
+    	// distance from current location
     	double dst = Projection.getStaticDistance(mGpsParams.getLongitude(), mGpsParams.getLatitude(), p.mLon, p.mLat);
     	
-    	brg = Helper.getMagneticHeading(brg, mGpsParams.getDeclinition());
-    	return String.format("%03d %03d", (int) dst, (int) brg);
+    	// return  a formatted string
+    	return String.format("%03d %03d", (int) dst, (int) hdg);
     }
     
     // Update our current location based upon the provided GPS settings
@@ -180,6 +187,7 @@ public class POI {
     }
     
     // Search our list for a name that closely matches what is passed in.
+    //
     public void search(String name, LinkedHashMap<String, String> params) {
     	if(null != mPoints) {
     		final String uName = name.toUpperCase();
@@ -194,6 +202,8 @@ public class POI {
     	}
     }
     
+    // Return the placemark for the given name. Uppercase compare for everything
+    //
     public KmlPlacemarkParser.Placemark getPlacemark(String name){
     	if(null != mPoints) {
     		final String uName = name.toUpperCase();

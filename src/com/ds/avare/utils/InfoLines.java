@@ -588,13 +588,16 @@ public class InfoLines {
         }
 
         case ID_FLD_HDG: {
-            return " "
-                    + Helper.correctConvertHeading(Math.round((Helper
-                            .getMagneticHeading(mLocationView.getGpsParams()
-                                    .getBearing(), mLocationView.getGpsParams()
-                                    .getDeclinition())))) + '\u00B0';
+        	if(mLocationView.getGpsParams().getSpeed() > 0) {
+	            return " "
+	                    + Helper.correctConvertHeading(Math.round((Helper
+	                            .getMagneticHeading(mLocationView.getGpsParams()
+	                                    .getBearing(), mLocationView.getGpsParams()
+	                                    .getDeclinition())))) + '\u00B0';
+	        }
+        	break;
         }
-
+        
         case ID_FLD_BRG: {
             if (mLocationView.getStorageService() != null) {
                 if (mLocationView.getStorageService().getDestination() != null) {
