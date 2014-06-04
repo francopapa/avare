@@ -132,12 +132,13 @@ public class POI {
 		}
 	}
 
-	// Utility function to draw text with a curved corner rectangle background
+	// Utility function to draw text with a curved corner rectangle background.
+	// This will be replaced with the "helper" object in the refactored code
 	//
     private void drawShadowedText(Canvas canvas, float mDipToPix, Paint paint, String text, float x, float y) {
-    	Rect mTextSize = new Rect();
-    	RectF mShadowBox = new RectF();
-    	Paint mShadowPaint = new Paint();
+    	Rect mTextSize = new Rect();	// This should not be happening during draw
+    	RectF mShadowBox = new RectF();	// allocation of paint objects is too slow
+    	Paint mShadowPaint = new Paint();	// should  be done statically at create time
     	
         final int XMARGIN = (int) (5 * mDipToPix);
         final int YMARGIN = (int) (5 * mDipToPix);

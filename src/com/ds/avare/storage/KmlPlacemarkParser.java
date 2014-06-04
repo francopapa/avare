@@ -80,7 +80,7 @@ public class KmlPlacemarkParser {
     //
     private List<Placemark> readKmlData(XmlPullParser parser) throws XmlPullParserException, IOException {
 
-        parser.require(XmlPullParser.START_TAG, NS, KML);
+        parser.require(XmlPullParser.START_TAG, NS, KML);	// We must be inside the <kml> tag now
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
@@ -100,7 +100,7 @@ public class KmlPlacemarkParser {
     private List<Placemark> readDocument(XmlPullParser parser) throws XmlPullParserException, IOException {
         List<Placemark> entries = new ArrayList<Placemark>();
 
-        parser.require(XmlPullParser.START_TAG, NS, DOCUMENT);
+        parser.require(XmlPullParser.START_TAG, NS, DOCUMENT);	// Must be inside of <Document> now
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
@@ -120,9 +120,9 @@ public class KmlPlacemarkParser {
     // Found "Folder", now search for the "Placemark"
     //
     private List<Placemark> readFolder(XmlPullParser parser) throws XmlPullParserException, IOException {
-    	List<Placemark> entries = new ArrayList<Placemark>();
+        parser.require(XmlPullParser.START_TAG, NS, FOLDER);	// We must be inside <Folder> at this point
 
-        parser.require(XmlPullParser.START_TAG, NS, FOLDER);
+        List<Placemark> entries = new ArrayList<Placemark>();
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
@@ -147,7 +147,7 @@ public class KmlPlacemarkParser {
         public final float  mLon;
         public final float  mAlt;
 
-        public Placemark(String name, String description, float lat, float lon, float alt) {
+        private Placemark(String name, String description, float lat, float lon, float alt) {
             this.mName = name;
             this.mDescription = description;
             this.mLat = lat;
@@ -191,6 +191,7 @@ public class KmlPlacemarkParser {
     // Inside of the "Point" tag, we only care about the coordinates
     //
     private String readPoint(XmlPullParser parser) throws XmlPullParserException, IOException {
+    	String coordinates = null;
         parser.require(XmlPullParser.START_TAG, NS, POINT);
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -198,12 +199,12 @@ public class KmlPlacemarkParser {
             }
             String name = parser.getName();
             if (name.equals(COORDINATES)) {
-                return readCoordinates(parser);
+                coordinates = readCoordinates(parser);
             } else {
                 skip(parser);
             }
         }  
-        return null;
+        return coordinates;
     }
 
     // Extract the "name"
