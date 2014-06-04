@@ -253,8 +253,6 @@ public class LocationView extends View implements MultiTouchObjectCanvas<Object>
     boolean mDoCallbackWhenDone;
     LongTouchDestination mLongTouchDestination;
 
-    POI mPOI;
-    
     /**
      * @param context
      */
@@ -351,8 +349,6 @@ public class LocationView extends View implements MultiTouchObjectCanvas<Object>
         mDipToPix = Helper.getDpiToPix(context);
         
         mInfoLines = new InfoLines(this);
-        
-        mPOI = new POI(context, mDipToPix, "/sdcard/com.ds.avare/My Places.kml");
     }
     
     /**
@@ -1363,6 +1359,18 @@ public class LocationView extends View implements MultiTouchObjectCanvas<Object>
         }
     }
     
+    private void drawPointsOfInterest(Canvas canvas) {
+        if(mService != null && mPointProjection == null) {
+        	mService.getPOI().draw(canvas, mFace, mOrigin);
+        }
+    }
+
+    private void drawStatusLines(Canvas canvas){
+    	if(null != mInfoLines) {
+    		mInfoLines.drawCornerTextsDynamic(canvas, mPaint, TEXT_COLOR, TEXT_COLOR_OPPOSITE, SHADOW);
+    	}
+    }
+    
     /**
      * @param canvas
      * Does pretty much all drawing on screen
@@ -1392,18 +1400,18 @@ public class LocationView extends View implements MultiTouchObjectCanvas<Object>
         drawObstacles(canvas);
         drawRunways(canvas);
         drawAircraft(canvas);
-      	mPOI.draw(canvas, mFace, mOrigin);
+        drawPointsOfInterest(canvas);
         
         if(mTrackUp) {
             canvas.restore();
         }
-        
+
+        // All items below are drawn with no consideration to North or Track being UP
         drawDistanceRings(canvas);
         drawCDI(canvas);
         drawVASI(canvas);
-      	mInfoLines.drawCornerTextsDynamic(canvas, mPaint, TEXT_COLOR, TEXT_COLOR_OPPOSITE, SHADOW);
+        drawStatusLines(canvas);
       	drawEdgeMarkers(canvas);
-      	
     }    
 
     /**
@@ -1461,7 +1469,7 @@ public class LocationView extends View implements MultiTouchObjectCanvas<Object>
          */
         mGpsParams = params;
 
-        mPOI.setGpsParams(params);
+        mService.getPOI().setGpsParams(params);
         
         updateCoordinates();
         
@@ -1520,6 +1528,10 @@ public class LocationView extends View implements MultiTouchObjectCanvas<Object>
         
         // Tell the odometer how to access preferences
         mService.getOdometer().setPref(mPref);
+
+        // Tell the POI object our display scale
+        mService.getPOI().setDipToPix(mDipToPix);
+
     }
 
     /**

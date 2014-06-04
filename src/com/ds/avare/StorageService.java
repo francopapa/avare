@@ -28,6 +28,7 @@ import com.ds.avare.instruments.VNAV;
 import com.ds.avare.network.TFRFetcher;
 import com.ds.avare.place.Area;
 import com.ds.avare.place.Destination;
+import com.ds.avare.place.POI;
 import com.ds.avare.place.Plan;
 import com.ds.avare.position.Movement;
 import com.ds.avare.position.Pan;
@@ -188,6 +189,9 @@ public class StorageService extends Service {
      */
     private FlightStatus mFlightStatus;
     
+    // User defined points of interest
+    private POI mPOI;
+    
     /**
      * @author zkhan
      *
@@ -286,6 +290,8 @@ public class StorageService extends Service {
         
         mFlightStatus = new FlightStatus(mGpsParams);
         
+        mPOI = new POI(getApplicationContext(), "/sdcard/com.ds.avare/My Places.kml");
+
         /*
          * Monitor TFR every hour.
          */
@@ -905,6 +911,10 @@ public class StorageService extends Service {
      */
     public void setCheckLists(LinkedList<Checklist> list) {
         mCheckLists = list;
+    }
+    
+    public POI getPOI() {
+    	return mPOI;
     }
     
 }

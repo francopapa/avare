@@ -52,7 +52,7 @@ public class POI {
 	 * public constructor for user defined PointsOfInterest
 	 * @param fileName Name of the coordinate file to read
 	 */
-	public POI(Context context, float pix, String fileName) {
+	public POI(Context context, String fileName) {
 		KmlPlacemarkParser parser = new KmlPlacemarkParser();
 		try {
 			FileInputStream  kmlStream = new FileInputStream(fileName);
@@ -67,16 +67,18 @@ public class POI {
 		mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Style.STROKE);
-        
-        // Calculate some "constants" 
-        mPix = pix;
+	}
+
+	// Calculate some of the dispay size constants
+	public void setDipToPix(float dipToPix) {
+        mPix = dipToPix;
         m2Pix = 2 * mPix;
         m5Pix = 5 * mPix;
         m8Pix = 8 * mPix;
         m15Pix = 15 * mPix;
         m25Pix = 25 * mPix;
 	}
-
+	
 	/***
 	 * Time to draw all of our points on the display
 	 * 
