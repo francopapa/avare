@@ -161,6 +161,8 @@ public class Area {
             /*
              * Find all airports and assign to mAirports
              */
+            
+            /*
             for(int i = 0; i < airports.length; i++) {
                 if(airports[i] != null) {
                     list = Arrays.asList(airports);
@@ -168,16 +170,18 @@ public class Area {
                     mAirports = (Airport[]) list.toArray();
                     mFound = true;                    
                 }
-            }
+            }*/
             
             /*
              * Now test if all airports are at glide-able distance.
              */
+            /*
             for(int i = 0; i < airports.length; i++) {
                 if(airports[i] != null) {
                     airports[i].setHeight(mAltitude);
                 }
             }
+            */
         }
 
     }

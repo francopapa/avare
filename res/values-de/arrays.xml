@@ -16,7 +16,7 @@ Redistribution and use in source and binary forms, with or without modification,
     <string-array name="resGroups">
         <item>Datenbank</item>
         <item>Wetter</item>
-        <item>AD-VAC-AREA Karten</item>
+        <item>AD-VAV-AREA Karten</item>
         <item>VFR Karten</item>
         <item>TAC Charts (nur USA)</item>
         <item>WAC Charts (nur USA)</item>

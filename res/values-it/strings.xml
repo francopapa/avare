@@ -125,9 +125,9 @@ Redistribution and use in source and binary forms, with or without modification,
     <string name="NightModeLabel">&quot;Modalita notturna&quot;</string>
     <string name="NightModeSummary">&quot;Scegli se la Luminosita dello schermo deve essere ridota per i voli notturni (Ripristino dell applicazione necessario)&quot;</string>
     <string name="Delete">&quot;Cancella&quot;</string>
-    <string name="Label">&quot;Label&quot;</string>
+    <string name="Label">&quot;Nome&quot;</string>
 			<!-- is here a translation needed?  -->
-    <string name="Plan">&quot;Rotta di volo&quot;</string>
+    <string name="Plan">&quot;Rotta&quot;</string>
 	<string name="PlanSet">&quot; aggiungi all Rotta di volo&quot;</string>
     <string name="PlanNoset">&quot; non aggiunto alla Rotta di volo&quot;</string>
     <string name="GpsOnly">&quot;Per assegnare un nome prima bisogna aggiungere i punti di riferimento/coordinate&quot;</string>
