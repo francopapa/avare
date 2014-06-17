@@ -142,10 +142,10 @@ public class Preferences {
             /*
              * I hope Android comes up with a better resource solution some time soon.
              */
-            return "http://94.126.19.170/eu/";
+            return "http://avare.ch";
         }
         else if (val.equals("1")) {
-            return "http://avare.kitepilot.org/eu/";
+            return "http://avare.kitepilot.org";
         }
         return("");
     }
