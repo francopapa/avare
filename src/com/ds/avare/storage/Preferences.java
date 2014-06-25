@@ -142,7 +142,7 @@ public class Preferences {
             /*
              * I hope Android comes up with a better resource solution some time soon.
              */
-            return "http://208.113.226.170/new/";
+            return "http://80.74.151.126/eu/";
         }
         else if (val.equals("1")) {
             return "http://avare.ch/eu/";
